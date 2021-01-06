@@ -9,7 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-
+<!-- navbar toggler starts-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- navbar toggler ends -->
     {% if title %}
     <title>Saadhan - {{title}}</title>
     {% else %}
@@ -38,8 +42,9 @@
                         </a>
                         {% endif %}
                         <!-- ***** Logo End ***** -->
+
                         <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
+                        <ul class="nav" id="navbarSupportedContent">
                             {% if user.is_authenticated %}
                             <li class="scroll-to-section"><a href="{% url 'application' %}">Application</a></li> 
                             <!-- <li class="scroll-to-section"><a href="{% url 'g' %}">Database</a></li>  -->
@@ -54,7 +59,8 @@
                             <li class="scroll-to-section"><a href="{% url 'login' %}">Log In</a></li> 
                             <li class="main-button"><a href="{% url 'register' %}">Sign Up</a></li>
                         {% endif %}
-                        </ul>        
+                        </ul>   
+                       
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
@@ -64,6 +70,43 @@
             </div>
         </div>
     </header>
+<script type="text/javascript">
+
+    if($('.menu-trigger').length){
+        $(".menu-trigger").on('click', function() { 
+            $(this).toggleClass('active');
+            $('.header-area .nav').slideToggle(200);
+        });
+    }
+
+
+    $(document).ready(function () {
+        $(document).on("scroll", onScroll);
+        
+        //smoothscroll
+        $('.scroll-to-section a[href^="#"]').on('click', function (e) {
+            e.preventDefault();
+            $(document).off("scroll");
+            
+            $('a').each(function () {
+                $(this).removeClass('active');
+            })
+            $(this).addClass('active');
+          
+            var target = this.hash,
+            menu = target;
+            var target = $(this.hash);
+            $('html, body').stop().animate({
+                scrollTop: (target.offset().top) + 1
+            }, 500, 'swing', function () {
+                window.location.hash = target;
+                $(document).on("scroll", onScroll);
+            });
+        });
+    });
+</script>
+
+
 {% block content %}
 
 {% endblock %}
