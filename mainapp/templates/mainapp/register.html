@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container contact">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="contact-info">
+                <!-- <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/> -->
+                
+            </div>
+        </div>
+        <div class="col-md-9">
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+            <div class="contact-form">
+                <fieldset>{{form|crispy}}</fieldset>
+                <div class="form-group">        
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-outline-info">Submit</button>
+                  </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

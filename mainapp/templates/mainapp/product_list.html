@@ -1,0 +1,42 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+    <table class="table table-striped">
+    <thead>
+    <a href="{% url 'product-category-view' user.id %}" class="btn text-info btn-xs pull-right"><b>-></b> Product Category</a>
+    <a href="{% url 'add-product' %}" class="btn text-info btn-xs pull-right"><b>+</b> Add New Product</a>
+    <!--<a href="{% url 'edit-product' user.id %}" class="btn text-info btn-xs pull-right"><b>+</b> Update Production Volume</a>-->
+    <legend>Products ({{item|length}})</legend>    
+    <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Product Name</th>
+            <th class="text-center">Category</th>
+            <th class="text-center">Actions</th>           
+            <!-- <th class="text-center">Action</th> -->
+        </tr>
+    </thead>
+
+    		{% for item in item %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.product_name}}</td>
+                <td class="text-center">{{item.product_category}} </td>
+    			<td class="text-center">
+                    <a href="{% url 'product-detail' item.id %}" class="btn btn-info" style="background-color: #03A9F4;">Details</a><b></b>
+                    <a href="{% url 'product-edit' item.id %}" class="btn btn-warning">Edit</a><b></b>
+                    <a href="{% url 'product-delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+    			<!-- <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> -->
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

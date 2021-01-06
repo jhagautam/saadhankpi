@@ -1,0 +1,88 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+        <a href="{% url 'product-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Product Details</a>
+        <a href="{% url 'product-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Product</a>
+    <table class="table table-striped">
+        <legend>Product Details</legend>
+        <tr>
+            <td>Product Name:</td><td>{{object.product_name}}</td>
+        </tr>
+        <tr>
+            <td>Product Description:</td><td>{{object.product_description}}</td>
+        </tr>
+        <tr>
+            <td>Product Category:</td><td>{{object.product_category}}</td> 
+        </tr>
+    </table>
+    <table class="table table-striped">
+    <legend>Sales Orders Placed for {{object.product_name}} ({{items|length}})</legend>
+        <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Order Date</th>
+            <th class="text-center">Customer</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">GST</th>
+            <th class="text-center">Total (incl. GST)</th>           
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+    		{% for item in items %}
+    		<tr>
+                <td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.sales_order.order_date}}</td>
+                <td class="text-center">{{item.sales_order.customer}}</td>
+                <td class="text-center">{{item.quantity}}</td>
+                <td class="text-center">Rs. {{item.price}}</td>
+                <td class="text-center">{{item.gst_rate}}%</td>
+                <td class="text-center">Rs. {{item.total}}</td>
+                <td class="text-center">
+                    <a href="{% url 'sales-order-details' item.sales_order.id %}">View Order</a>
+                </td>
+                {% if not items %}
+                <td class="text-center">Sorry, No Records Found</td>
+                {% endif %}
+    		</tr>	
+    		{% endfor %}
+    </table>
+    <table class="table table-striped">
+        <legend>Purchase Orders Placed for {{object.product_name}} ({{purchaseitems|length}})</legend>
+            <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Order Date</th>
+                <th class="text-center">Vendor</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">GST</th>
+                <th class="text-center">Total (incl. GST)</th>           
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>        
+            {% for item in purchaseitems %}
+            <tr>
+                <td class="text-center">{{forloop.counter}}</td>
+                <td class="text-center">{{item.purchase_order.order_date}}</td>
+                <td class="text-center">{{item.purchase_order.vendor}}</td>
+                <td class="text-center">{{item.quantity}}</td>
+                <td class="text-center">Rs. {{item.price}}</td>
+                <td class="text-center">{{item.gst_rate}}%</td>
+                <td class="text-center">Rs. {{item.total}}</td>
+                <td class="text-center">
+                    <a href="{% url 'purchase-order-details' item.purchase_order.id %}">View Order</a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

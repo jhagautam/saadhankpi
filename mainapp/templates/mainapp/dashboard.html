@@ -1,0 +1,1057 @@
+{% include 'mainapp/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load get_item from custom_tags %}
+{% load get_item2 from custom_tags %}
+{% load get_itemss from custom_tags %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/night_mode.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+<style type="text/css">
+
+    .justifyright{
+        text-align: left;
+    }
+    .cardtoptext{
+        font-size: 16px;
+        color:#A6ACAF;
+    }
+    .card-header{
+        border-width: 0px;
+        /*background-color: #3498DB;*/
+    }
+
+    .card-header:hover {
+        border-width: 1px;
+        border-color: #0ff;
+    }
+
+
+    .card_top,.button1 {
+        text-align: center;
+        color: #E5E7E9;
+        text-decoration-color: #fff;
+    }
+
+    .dashboard_background {
+    	margin-top: 80px;
+        background-color: #1C1C1C;
+    }
+    .row_side_padding {
+        margin-left: 20px;
+        margin-right:20px;
+        padding-top: 20px;
+        /*margin-bottom:20px;*/
+    }
+#start,#end{
+    background-color: #AED6F1;
+    border-width: 0px;
+    border-radius: 8px;
+}
+.card1 {
+  border-radius: 4px;
+  background: #3E3E3E;
+
+   /*background-color: rgba(10, 100, 150, 0.5);*/
+  box-shadow: 0 6px 10px rgba(20, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  /*padding: 14px 20px 18px 10px;*/
+  /*cursor: pointer;*/
+}
+
+.card1:hover {
+    border-width: 1px;
+    border-color: #0ff;
+  transform: scale(1.05);
+  box-shadow:0px 0px 10px 0.09px #0ff;
+  /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);*/
+}
+.active {
+  display: block;
+  margin: 0 21%;
+}
+
+/*button {
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ccc;
+  margin: 5px;
+}
+*/
+.vendor-button: {
+    float: right;
+    right: 120px;
+    text-align: justify-all;
+}
+.selected {
+  background: #2d3339;
+}
+
+#hold-buttons {
+  text-align: center;
+  padding: 25px;
+}
+.slider{
+    /*position: fixed;*/
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+.custom_adjust{
+
+}
+</style>
+
+<!-- <link id="dark-theme-style" rel="stylesheet" />
+<a
+        href="javascript:void()"
+        class="btn btn-outline-info btn-lg ml-auto font-weight-bold"
+        id="theme-toggler"
+        onclick="toggleTheme()"
+></a>
+<script src="{% static '/js/mode.js' %}"> </script> 
+ -->
+<!-- <div class="container"> -->
+<div class="dashboard_background">
+
+<div class="row row_side_padding">
+        <div class="col-md-6 column_side_padding ">
+            <div class="card1 card-chart">
+                <!-- <div class="card-header ">
+                    <h5 class="card-category card_top">Total Employee</h5>
+                    <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
+                </div> -->
+                <div class="card-body">
+                    <div class="chart-area card1">
+                        <canvas id="quantity_by_category"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card1 card-chart">
+                <!-- <div class="card-header">
+                    <h5 class="card-category card_top">Daily Sales</h5>
+                    <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> 3,500</h3>
+                </div> -->
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="amount_by_category"></canvas>
+                    </div>
+                </div>
+            </div>  
+        </div>
+</div>
+
+
+
+
+<div class="row row_side_padding">
+        <div class="col-lg-4 column_side_padding ">
+            <div class=" card1 card-chart">
+                <div class="card-header ">
+                    <h5 class="card-category card_top">Total Employee</h5>
+                    <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                        <canvas id="myChart" class="container"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- swapping cards -->
+<div class="col-lg-4">
+        <div class=" card1 card-chart" id="customer_card">
+                <div class="card-header">
+                    <h5 class="card-category card_top">Total Customers</h5>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm btn-info" onclick="function1()" class="card-title">Customer</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_customer}}</h3>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm btn-info vendor-button" onclick="function2()" class="card-title">Vendor</button>
+                        </div>
+
+                    </div>
+                   <!--  <span> <button onclick="function1()" class="card-title">Customer</button>  <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_customer}}</h3> <button onclick="function2()" class="card-title">Vendor</button></span> -->
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </div> 
+            <div class=" card1 card-chart" id="vendor_card" style="display:none">
+                <div class="card-header">
+                    <h5 class="card-category card_top">Total Vendors</h5>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm btn-info" onclick="function1()" class="card-title">Customer</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_vendor}}</h3>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm btn-info" onclick="function2()" class="card-title">Vendor</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="vendor_chart"></canvas>
+                    </div>
+                </div>
+            </div>
+  </div>
+
+        <div class="col-lg-4">
+            <div class=" card1 card-chart">
+                <div class="card-header">
+                    <h5 class="card-category card_top">Total Production</h5>
+                    <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i>{{total_production.amount__sum}}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="myChart3" class="container"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+    <div class="row row_side_padding">
+        <div class="col-lg-4">
+            <div class=" card1 card-chart">
+                <div class="card-header">
+                    <h5 class="card-category card_top">Maintenance Overhead</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="card-title"><span class="cardtoptext"> Cost  </span><span class="card_top">{{total_maintenance_cost.cost__sum}}</span></h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="card-title"><span class="cardtoptext justifyright">Days Vested  </span><span class="card_top">{{total_days_engaged.days_engaged__sum}}</span></h4>
+                        </div>
+                    </div>
+                    <!-- <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_maintenance_cost.cost__sum}}</h3> -->
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="myChart4"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class=" card1 card-chart">
+                <div class="card-header">
+                    <h5 class="card_top">Total Machine Count</h5>
+                    <h3 class="card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_machines}} </h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="myChart5" class="container"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class=" card1 card-chart">
+                <div class="card-header">
+                    <form id="submit_bookmark" method="POST">
+                        {% csrf_token %}
+                        
+                            <h5 class="card-category card_top">
+                                <div class="card-title input-group input-daterange">
+                                    
+                                    <input type="text" name="startdate" id="start" placeholder="Start Date" class="form-control text-left mr-2">
+                                    <span class="fa fa-calendar" id="fa-1"></span>
+                                    <input type="text" name="enddate" id="end" placeholder="End Date" class="form-control text-left ml-2">  <span class="fa fa-calendar" id="fa-2"></span>
+                                </div>
+                            </h5>
+                            <h5 class="card-title card_top">
+                                <div class="card-category">
+                                    <input type="submit" name="submit" class="btn button1 btn-md btn-block bootstrap-responsive btn-info" value="Get Result">
+                                </div>
+                            </h5>
+                        
+                      </form>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area card1">
+                      <canvas id="myChart6" class="container"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+$(document).ready(function() {
+
+  $('.input-daterange').datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    calendarWeeks: true,
+    clearBtn: true,
+    disableTouchKeyboard: true
+  });
+
+});
+</script>
+
+
+<script>
+
+var ctx = document.getElementById('amount_by_category').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for r in result3 %}'{{r}}',{% endfor %}],
+        datasets: [{
+            lineTension: 0,
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            label: 'Sales- Amount/Category',
+            data: [{% for r in result3 %}{{result3 | get_item2:r}},{% endfor %}],
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.8)',
+                'rgba(244, 67, 54, 0.5)'
+            ],
+            borderColor: [
+               '#fff',
+            ],
+            borderWidth: 3
+        },
+        {
+            lineTension: 0,
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            label: 'Purchase- Amount/Category',
+            data: [{% for r in result5 %}{{result5 | get_item2:r}},{% endfor %}],
+            backgroundColor: [
+
+                'rgba(66, 165, 245,0.5)'
+            ],
+            borderColor: [
+                '#fff',
+            ],
+            borderWidth: 3
+        },
+        ]
+
+    },
+
+    options: {
+        bezierCurve: false,
+        legend: {
+             labels: {
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+
+
+
+
+var ctx = document.getElementById('quantity_by_category').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+            lineTension: 0,
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+        labels: [{% for r in result2 %}'{{r}}',{% endfor %}],
+        datasets: [{
+            label: 'Sales- Quantity/Category',
+            data: [{% for r in result2 %}{{result2 | get_item2:r}},{% endfor %}],
+            backgroundColor: [
+                'rgba(142, 36, 170, 0.4)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                '#fff',
+            ],
+            borderWidth: 3
+        },
+        {
+            lineTension: 0,
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            label: 'Purchase- Quantity/Category',
+            data: [{% for r in result4 %}{{result4 | get_item2:r}},{% endfor %}],
+            backgroundColor: [
+                'rgba(66, 165, 245,0.5)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                '#fff',
+            ],
+            borderWidth: 3
+        },
+        ]
+
+    },
+
+    options: {
+        legend: {
+             labels: {
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+
+
+function function1() {
+  var x = document.getElementById("customer_card");
+  var y=  document.getElementById("vendor_card");
+  if (x.style.display === "none") {
+    y.style.display= "none";
+    x.style.display = "block";
+  }
+}
+
+function function2() {
+  var x = document.getElementById("customer_card");
+  var y=  document.getElementById("vendor_card");
+  if (y.style.display === "none") {
+    x.style.display= "none";
+    y.style.display = "block";
+  }
+}
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+// Chart.defaults.global.defaultFontColor = "#fff";
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for x in q1 %}'{{x.designation_name}}',{% endfor %}],
+        datasets: [{
+            label: 'Total Employees',
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            data: [{% for x in q1 %}{{x.employee__employee_name__count}},{% endfor %}],
+            backgroundColor: [
+                'transparent',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                
+            ],
+            borderWidth: 4
+        },
+
+        {
+            label: 'Female',
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            data: [{% for q in q1 %} {{q2 | get_item:q.id}},{% endfor %}],
+            backgroundColor: [
+                'transparent',
+            ],
+            borderColor: [
+                
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 4
+        },
+        {
+            label: 'Male',
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            data: [{% for q in q1 %} {{q3 | get_item:q.id}},{% endfor %}],
+            backgroundColor: [
+                'transparent',
+            ],
+            borderColor: [
+                
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 4
+        },
+        {
+            label: 'Others',
+            pointBorderColor: "#FFF",
+            pointBackgroundColor: "#1d7af3",
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            data: [{% for q in q1 %} {{q4 | get_item:q.id}},{% endfor %}],
+            backgroundColor: [
+                'transparent',
+            ],
+            borderColor: [
+                
+                
+                'rgba(153, 102, 255, 1)',
+            ],
+            borderWidth: 4
+        },
+        ]
+
+    },
+    options: {
+        legend: {
+             labels: {
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+var ctx = document.getElementById('myChart2').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for x in customer_city_wise %}'{{x | get_item4:'key'}}',{% endfor %}],
+        datasets: [{
+            // label: 'Total Employees',
+            data: [{% for x in customer_city_wise %}{{x | get_item5:'key'}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(55, 159, 64, 0.8)',
+                'rgba(55, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        },
+        ]
+
+    },
+
+    options: {
+        legend: {
+            display: false,
+             labels: {
+                display: false,
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+
+
+var ctx = document.getElementById('vendor_chart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for x in vendor_city_wise %}'{{x | get_item4:'key'}}',{% endfor %}],
+        datasets: [{
+            // label: 'Total Employees',
+            data: [{% for x in vendor_city_wise %}{{x | get_item5:'key'}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(55, 159, 64, 0.8)',
+                'rgba(55, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        },
+        ]
+
+    },
+
+    options: {
+        legend: {
+            display: false,
+             labels: {
+                display: false,
+                  // fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+
+
+var ctx = document.getElementById('myChart3').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for r in result %} '{{r}}', {% endfor %}],
+        pointBorderColor: "#FFF",
+        pointBackgroundColor: "#1d7af3",
+        pointBorderWidth: 2,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 1,
+        pointRadius: 4,
+        datasets: [{
+            label: 'Total Production Volume',
+            data: [{% for r in result %} {{result | get_item2:r}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        },
+        ]
+
+    },
+    options: {
+        legend: {
+             labels: {
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [{% for q in q6 %} '{{q.machine_name}}', {% endfor %}],
+        datasets: [{
+            label: 'Total Maintenance Cost',
+            data: [{% for q in q6 %} {{q.maintenance_cost__cost__sum}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            
+            borderWidth: 2
+        },
+        {
+            label: 'Total Working Days Affected',
+            data: [{% for q in q7 %} {{q.maintenance_cost__days_engaged__sum}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            
+            borderWidth: 2
+        },
+        ]}
+    ,
+    options: {
+        responsive: true,
+        // maintainAspectRatio: false,
+        
+        layout: {
+            margin: {
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20
+            }
+        }
+        ,
+        legend: {
+             display: false,
+             labels: {
+                 display: false,
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { display: true,color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: {  display: true,color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+
+var ctx = document.getElementById('myChart5').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for q in q8 %} '{{q.machine_name}}', {% endfor %}],
+        datasets: [{
+            label: 'Total Machine Count',
+            data: [{% for q in q8 %} {{q.machine_count}},{% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2
+        },
+        ]
+
+    },
+    options: {
+        legend: {
+             labels: {
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+</script>
+<script>
+$('.display_card_button').on('click', (e) => {
+  const target = e.target
+  const id = parseInt(target.id.split('-')[1])
+  $('card_display').removeClass('active')
+  $('.display_card_button').removeClass('selected')
+  $(`#card_display-${id}`).addClass('active')
+  $(`#p-${id}`).addClass('selected')
+})
+
+var ctx = document.getElementById('myChart6').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Sales Order','Purchase Order'],
+
+        datasets: [{
+            label: ['Total Sales Order','Total Purchase Order'],
+            data: [8000,5000],
+            backgroundColor: [
+                'rgba(95, 199, 132, 0.8)',
+                'rgba(255, 99, 132, 0.8)',
+            ],
+            // borderColor: [
+            //     'rgba(95, 199, 132, 1)',
+            //     'rgba(255, 99, 132, 1)',
+            // ],
+            borderWidth: 2
+        },
+        ]
+
+    },
+    options: {
+        maintainAspectRatio: true,
+        legend: {
+             labels: {
+                  fontColor: '#2980B9'
+                 }
+              },
+        title: {
+            display: false,
+            fontColor: 'blue',
+            text: 'Custom Chart Title'
+        }     ,
+        scales: {
+            yAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    beginAtZero:true,
+                    fontColor: '#A6ACAF'
+                },
+            }],
+          xAxes: [{
+                gridLines: { color: "#4D5656" },
+                ticks: {
+                    fontColor: '#A6ACAF'
+                },
+            }]
+        } 
+
+    }
+});
+$(document).on('submit','#submit_bookmark',function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url:'/updatechart/',
+            data:{
+                start_date: $('#start').val(),
+                end_date: $('#end').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response){
+                // var x = JSON.parse(response["context1"]);
+                // var y= x[0];
+                // x={{ res|get_itemss }}
+                // var x= response[0].res;
+                console.log('printing',response.res, response.res2)
+                // myChart.data.datasets[0].data=[1000,4000];
+                myChart.data.datasets[0].data=[response.res,response.res2];
+                // myChart.data.datasets[1].data=[response.res2];
+                myChart.update();
+            }
+        });
+    })
+</script>

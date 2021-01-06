@@ -1,0 +1,57 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+        <a href="{% url 'sales-order-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Sales Order</a>
+        <a href="{% url 'sales-order-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Sales Order</a>
+    <table class="table table-striped">
+        <legend>Order Details</legend>
+        <tr>
+            <td>Firm Name:</td><td>{{object.customer}}</td>
+        </tr>
+        <tr>
+            <td>Order Date:</td><td>{{object.order_date}}</td> 
+        </tr>
+        <tr>
+            <td>Freight:</td><td>Rs. {{object.freight}}</td> 
+        </tr>
+        <tr>
+            <td>Remarks:</td><td>{{object.remarks}}</td> 
+        </tr>
+        <tr>
+            <td>Total Invoice Value:</td><td>Rs. {{object.total_amount}}</td> 
+        </tr>
+    </table>
+    <table class="table table-striped">
+    <legend>Items ({{items|length}})</legend>
+        <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Product</th>
+            <th class="text-center">Qty</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">GST</th>
+            <th class="text-center">Total (incl. GST)</th>           
+            <!-- <th class="text-center">Action</th> -->
+        </tr>
+    </thead>
+    		{% for item in items %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.product}}</td>
+                <td class="text-center">{{item.quantity}} </td>
+                <td class="text-center">Rs. {{item.price}}</td>
+                <td class="text-center">{{item.gst_rate}}%</td>
+                <td class="text-center">Rs. {{item.total}}</td>
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

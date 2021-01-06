@@ -1,0 +1,40 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-9 col-md-offset-9 custyle">
+    <table class="table table-striped">
+    <thead>
+    <a href="{% url 'create_designation' %}" class="btn text-info btn-xs pull-right"><b>-></b> Add New Designation</a>
+    <a href="{% url 'add_employee' %}" class="btn text-info btn-xs pull-right"><b>+</b> Add New Employee</a>
+    <!--<a href="{% url 'edit-product' user.id %}" class="btn text-info btn-xs pull-right"><b>+</b> Update Production Volume</a>-->
+    <legend>Employee ({{employees|length}})</legend>    
+    <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Employee Name</th>
+            <!-- <th class="text-center">Employee LastName</th> -->
+            <th class="text-center">Gender</th>
+            <th class="text-center">Designation</th>
+            <th class="text-center">Actions</th>           
+            <!-- <th class="text-center">Action</th> -->
+        </tr>
+    </thead>
+            {% for employees in employees %}
+            <tr>
+                <td class="text-center">{{employees.id}}</td>
+                <td class="text-center">{{employees.employee_name}}</td>
+                <!-- <td class="text-center">{{employees.lastname}}</td> -->
+                <td class="text-center">{{employees.sex}}</td>
+                <td class="text-center">{{employees.employee_designation}}</td>
+                <td class="text-center"><a href="{% url 'edit_employee' employees.id %}" class="btn btn-warning">Edit</a></td>
+            </tr>   
+            {% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

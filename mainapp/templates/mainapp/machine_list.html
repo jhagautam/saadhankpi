@@ -1,0 +1,41 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+    <table class="table table-striped">
+    <thead>
+    <a href="{% url 'maintenance-list' user.id %}" class="btn text-info btn-xs pull-right"><b>-></b> Maintenance</a>
+    <a href="{% url 'machine-create' user.id %}" class="btn text-info btn-xs pull-right"><b>+</b> Add New Machine</a>
+    <legend>Machines ({{item|length}})</legend>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Machine Name</th>
+            <th class="text-center">Machine Supervisor</th>
+            <th class="text-center">Machine Count</th>           
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+
+    		{% for item in item %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.machine_name}}</td>
+                <td class="text-center">{{item.operator}} </td>
+                <td class="text-center">{{item.machine_count}} Nos.</td>
+    			<td class="text-center">
+                    <a href="{% url 'machine-detail' item.id %}" class="btn btn-info" style="background-color: #03A9F4;">Details</a><b></b>
+                    <a href="{% url 'machine-edit' item.id %}" class="btn btn-warning">Edit</a><b></b>
+                    <a href="{% url 'machine-delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

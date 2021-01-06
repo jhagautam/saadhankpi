@@ -1,0 +1,42 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+    <table class="table table-striped">
+    <thead>
+    <a href="{% url 'machine-list' user.id %}" class="btn text-info btn-xs pull-right"><b><-</b> Back</a>
+    <a href="{% url 'maintenance-create' user.id %}" class="btn text-info btn-xs pull-right"><b>+</b> Add New Maintenance Record</a>
+    <legend>Maintenance Records ({{item|length}})</legend>    
+    <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Machine Name</th>
+            <th class="text-center">Cost</th>
+            <th class="text-center">Days Engaged</th>
+            <th class="text-center">Date</th>           
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+
+    		{% for item in item %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.machine}}</td>
+                <td class="text-center">Rs. {{item.cost}} </td>
+                <td class="text-center">{{item.days_engaged}} Days</td>
+                <td class="text-center">{{item.date}}</td>
+    			<td class="text-center">
+                    <a href="{% url 'maintenance-edit' item.id %}" class="btn btn-warning">Edit</a><b> |</b>
+                    <a href="{% url 'maintenance-delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

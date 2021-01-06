@@ -1,0 +1,68 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+        <a href="{% url 'customer-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Customer Details</a>
+        <a href="{% url 'customer-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Customer</a>
+    <table class="table table-striped">
+        <legend>Customer Details</legend>
+        <tr>
+            <td>Firm Name:</td><td>{{object.firm_name}}</td>
+        </tr>
+        <tr>
+            <td>GSTIN:</td><td>{{object.gstin}}</td>
+        </tr>
+        <tr>
+            <td>Contact Person:</td><td>{{object.contact_person}}</td> 
+        </tr>
+        <tr>
+            <td>Contact No.:</td><td>{{object.primary_contact_number}}, {{object.secondary_contact_number}}</td>
+        </tr>
+        <tr>
+            <td>Email:</td><td>{{object.email_address}}</td> 
+        </tr>
+        <tr>
+            <td>Address:</td><td>{{object.street_address}}, {{object.city}} ({{object.pin_code}})</td> 
+        </tr>
+        <tr>
+            <td></td><td>{{object.district}}, {{object.state}} | INDIA</td> 
+        </tr>
+        <tr>
+            <td>Remarks:</td><td>{{object.remarks}}</td> 
+        </tr>
+    </table>
+    <table class="table table-striped">
+    <legend>Sales Orders by {{object.firm_name}} ({{items|length}})</legend>
+        <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Order Date</th>
+            <th class="text-center">Invoice Value</th>
+            <th class="text-center">Remarks</th>
+            <th class="text-center">Actions</th>           
+            <!-- <th class="text-center">Action</th> -->
+        </tr>
+    </thead>
+    		{% for item in items %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.order_date}}</td>
+                <td class="text-center">Rs. {{item.total_amount}}</td>
+                <td class="text-center">{{item.remarks}}</td>
+                <td class="text-center">
+                    <a href="{% url 'sales-order-details' item.id %}">Details</a><b> |</b>
+                    <a href="{% url 'sales-order-edit' item.id %}">Edit</a><b> |</b>
+                    <a href="{% url 'sales-order-delete' item.id %}">Delete</a>
+                </td>
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

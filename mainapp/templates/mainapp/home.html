@@ -1,0 +1,205 @@
+
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+    .card_top,.button1 {
+        text-align: center;
+        color: #34495E;
+        text-decoration-color: #fff;
+    }
+.card1 {
+  border-radius: 4px;
+  background: 'transparent';
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.card1:hover {
+    /*border-width: 1px;*/
+    /*border-color: #0ff;*/
+  transform: scale(1.05);
+  box-shadow:0px 0px 10px 0.09px #0ff;
+}
+
+</style>
+
+
+    <div class="main-banner" id="top">
+        <video autoplay muted loop id="bg-video">
+            <source src="{% static '/img/chart1.mp4' %}" type="video/mp4" />
+        </video>
+        <!-- <img id="bg-video" src="{% static 'img/display_image_1.jpg' %}"></div> -->
+
+        <div class="video-overlay header-text">
+            <div class="caption">
+                <h6>work smarter, get stronger</h6>
+                <h2>Innovating Your <em>Business</em> </h2>
+                <div class="main-button scroll-to-section">
+                    <a href="{% url 'register' %}">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** Features Item Start ***** -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>Who are <em>WE</em></h2>
+                        <!-- <img src="{% static 'img/line-dec.png' %}" alt="waves"> -->
+                        <p>We are a group of highly motivated students from IIT Roorkee with the spark of giving back to the society. We use our technical knowledge to make an <em>Atmanirbhar Bharat</em></p>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <ul class="features-items">
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <!-- <img src="{% static 'img/features-first-icon.png' %}" > -->
+                            </div>
+                            <div class="right-content">
+                                <h4>About Us</h4>
+                                <p>Saadhan is business analytics platform that will help you manage you business processes efficiently by montering each and every factor that affects the business process. Build to help the Indian MSMEs, so that they could keep track of important paramenters of their business without the need to hire specialists.</p>
+                                <p>Saadhan is business analytics platform that will help you manage you business processes efficiently by montering each and every factor that affects the business process. Build to help the Indian MSMEs, so that they could keep track of important paramenters of their business without the need to hire specialists.</p>
+                                <br>
+                                <p class=""><span > Saadhan is business analytics platform that will help you manage you business processes efficiently by montering each and every factor that affects the business process. Build to help the Indian MSMEs, so that they could keep track of important paramenters of their business without the need to hire specialists.</span></p>
+                                <p class="">Saadhan is business analytics platform that will help you manage you business processes efficiently by montering each and every factor that affects the business process. Build to help the Indian MSMEs, so that they could keep track of important paramenters of their business without the need to hire specialists.</p>
+                                <!-- <a href="#" class="text-button">Discover More</a> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Profile pic section starts -->
+
+<div class="container cta-content " style="align-items: center;">
+    <h2 class="content_justify" ><em >Meet the <span style="color: #03A9F4">Team</span></em></h2>
+    <br>
+        <div class="row row_side_padding">
+            <div class="col-lg-3 column_side_padding ">
+                <div class="card card1 card-chart">
+                        <div class="card-header ">
+                            <!-- / -->
+                            <h5 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> Gautam Kumar Jha</h5>
+                        </div>
+                        <div class="card container_image">
+                            <img src="{% static 'img/gautam_jha.jpeg' %}" class="custom_image image">
+                            <div class="overlay">
+                                <div class="text">Gautam Jha</div>
+                            </div>
+                            <!-- <canvas id="myChart" class="container"></canvas> -->
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 column_side_padding ">
+                <div class="card card1 card-chart">
+                    <div class="card-header ">
+                            <!-- / -->
+                            <h5 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> Mayur Lila</h5>
+                        </div>
+
+                        <div class="card container_image">
+                            <img src="{% static 'img/mayur_lila.jpg' %}" class="custom_image image">
+                            <div class="overlay">
+                                <div class="text">Mayur Lila</div>
+                            </div>
+                            <!-- <canvas id="myChart" class="container"></canvas> -->
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 column_side_padding ">
+                <div class="card card1 card-chart">
+                    <div class="card-header ">
+                            <!-- / -->
+                            <h5 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> Devendra Mahajan</h5>
+                        </div>
+
+                        <div class="card container_image">
+                            <img src="{% static 'img/devendra_mahajan.jpeg' %}" class="custom_image image">
+                            <div class="overlay">
+                                <div class="text">Devendra Mahajan</div>
+                            </div>
+                            <!-- <canvas id="myChart" class="container"></canvas> -->
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3 column_side_padding ">
+                <div class="card card1 card-chart">
+                    <div class="card-header ">
+                            <!-- / -->
+                            <h5 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> Atharva Kulkarni</h5>
+                        </div>
+
+                        <div class="card container_image">
+                            <img src="{% static 'img/atharva_kulkarni.jfif' %}" class="custom_image image">
+                            <div class="overlay">
+                                <div class="text">Atharva Kulkarni</div>
+                            </div>
+                            <!-- <canvas id="myChart" class="container"></canvas> -->
+                        </div>
+                </div>
+            </div>
+           
+        </div>
+</div>
+<div style="background-color: rgba(3, 155, 229, 0.7);">
+    <section class="section" id="contact-us">
+        <div class="container-fluid">
+                <div class="col-lg-12 col-md-6 col-xs-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required="">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                              <fieldset>
+                                <input name="subject" type="text" id="subject" placeholder="Subject">
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <button type="submit" id="form-submit" class="main-button">Send Message</button>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+    <!-- ***** Contact Us Area Ends ***** -->
+    
+    <!-- ***** Footer Start ***** -->
+    <footer style="background-color: #212F3C">
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <!-- You shall support us a little via PayPal to info@templatemo.com -->
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

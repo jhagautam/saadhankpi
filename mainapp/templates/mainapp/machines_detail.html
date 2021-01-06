@@ -1,0 +1,48 @@
+{% extends 'mainapp/application.html' %}
+{% block application_content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+        <a href="{% url 'machine-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Machine Details</a>
+        <a href="{% url 'machine-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Machine</a>
+    <legend>Machine Details</legend>
+        <table class="table table-striped">
+        <tr>
+            <td>Machine Name:</td><td>{{object.machine_name}}</td>
+        </tr>
+        <tr>
+            <td>Machine Count:</td><td>{{object.machine_count}}</td>
+        </tr>
+        <tr>
+            <td>Supervisor:</td><td>{{object.operator}}</td> 
+        </tr>
+    </table>
+    
+    <legend>Maintenance Record ({{items|length}})</legend>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Cost</th>
+            <th class="text-center">Days Engaged</th>
+            <th class="text-center">Date</th>          
+            <!-- <th class="text-center">Action</th> -->
+        </tr>
+    </thead>
+    		{% for item in items %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">Rs. {{item.cost}}</td>
+                <td class="text-center">{{item.days_engaged}} Days</td>
+                <td class="text-center">{{item.date}}</td>
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}

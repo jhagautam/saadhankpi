@@ -1,0 +1,69 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+  .active1, .btn:hover
+  {
+    background-color: #039BE5;
+    text-decoration-color: #fff;
+  }
+</style>
+
+
+
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+<body class="format-css-2">
+  <div class="d-flex format-css-2" id="wrapper" >
+    <!-- Sidebar -->
+    <div class="border-right" id="sidebar-wrapper" style="background-color: rgba(3, 155, 229,0.5);">
+      <div class="sidebar-heading" style="background-color: rgba(3, 155, 229,0.5);">Application </div>
+      <div class="list-group list-group-flush application_menu" >
+        <a href="{% url 'products' user.id %}" class="sidebar-heading list-group-item-action application_btn active1" >Products</a>
+        <a href="{% url 'machine-list' user.id %}" class="sidebar-heading list-group-item-action application_btn">Machine</a>
+        <a href="{% url 'update_employee' %}" class="sidebar-heading list-group-item-action application_btn">Employee</a>
+        <a href="{% url 'customer-list' user.id %}" class="sidebar-heading list-group-item-action  application_btn">Customers</a>
+        <a href="{% url 'vendor-list' user.id %}" class="sidebar-heading list-group-item-action application_btn">Vendors</a>
+        <a href="{% url 'sales-order-view' user.id %}" class="sidebar-heading list-group-item-action  application_btn">Sales Order</a>
+        <a href="{% url 'purchase-order-view' user.id %}" class="sidebar-heading list-group-item-action  application_btn">Purchase Order</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-info" style="background-color: #03A9F4;" id="menu-toggle">Toggle Menu</button>
+      </nav>
+
+      <div class="container-fluid">
+        {% block application_content %}
+        {% endblock %}
+      </div>
+    </div>
+
+  </div>
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+  <script type="text/javascript">
+    var header = document.getElementById("application_menu");
+var btns = header.getElementsByClassName("application_btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  var current = document.getElementsByClassName("active1");
+  current[0].className = current[0].className.replace(" active1", "");
+  this.className += " active1";
+  });
+}
+  </script>
+</body>
+{% endblock %}

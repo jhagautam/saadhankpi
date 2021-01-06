@@ -1,0 +1,40 @@
+{% extends 'mainapp/application.html' %}
+{% load crispy_forms_tags %}
+{% block application_content %}
+<div class="container">
+	<div class="row">
+	<div class="col-2">
+	</div>
+    <div class="col-9 col-md-offset-9 custyle">
+    <table class="table table-striped">
+    <thead>
+    <a href="{% url 'purchase-order-create' %}" class="btn text-info btn-xs pull-right"><b>+</b> Add Purchase Order</a>
+    <legend>Purchase Orders ({{item|length}})</legend>    
+    <tr>
+            <th class="text-center">#</th>
+            <th class="text-center">Vendor</th>
+            <th class="text-center">Order Date</th>
+            <th class="text-center">Invoice Value</th>
+            <th class="text-center">Actions</th>           
+            <!-- <th class="text-center">Action</th> -->
+        </tr>
+    </thead>
+
+    		{% for item in item %}
+    		<tr>
+    			<td class="text-center">{{forloop.counter}}</td>
+    			<td class="text-center">{{item.vendor}}</td>
+                <td class="text-center">{{item.order_date}}</td>
+                <td class="text-center">Rs. {{item.total_amount}}</td>
+    			<td class="text-center">
+                    <a href="{% url 'purchase-order-details' item.id %}" class="btn btn-info" style="background-color: #03A9F4;">Details</a><b></b>
+                    <a href="{% url 'purchase-order-edit' item.id %}" class="btn btn-warning">Edit</a><b></b>
+                    <a href="{% url 'purchase-order-delete' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+    		</tr>	
+    		{% endfor %}
+    </table>
+    </div>
+</div>
+</div>
+{% endblock %}
