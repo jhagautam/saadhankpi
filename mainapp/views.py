@@ -165,9 +165,9 @@ def add_employee(request):
 @login_required
 def edit_employee(request, pk):
 	m=employee.objects.get(id=pk)
-	form=employeeForm(instance=m)
+	form=employee_form(instance=m)
 	if request.method == 'POST':
-		form=employeeForm(request.POST,instance=m)
+		form=employee_form(request.POST,instance=m)
 		if form.is_valid():
 			form.save()
 			return redirect('/update_employee/')

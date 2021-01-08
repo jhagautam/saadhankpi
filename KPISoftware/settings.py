@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'l4l5y=m&72r2k#+v$64t5wr7wn538n$@%=(&3qt*mva48_7==#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+# DEBUG = True
 DEBUG = False
 
 

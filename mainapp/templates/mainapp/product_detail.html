@@ -4,12 +4,11 @@
 
 <div class="container">
 	<div class="row">
-	<div class="col-2">
-	</div>
-    <div class="col-9 col-md-offset-9 custyle">
+	
+    <div class="col-12 col-md-offset-12 custyle">
         <a href="{% url 'product-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Product Details</a>
         <a href="{% url 'product-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Product</a>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
         <legend>Product Details</legend>
         <tr>
             <td>Product Name:</td><td>{{object.product_name}}</td>
@@ -21,7 +20,7 @@
             <td>Product Category:</td><td>{{object.product_category}}</td> 
         </tr>
     </table>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
     <legend>Sales Orders Placed for {{object.product_name}} ({{items|length}})</legend>
         <thead>
         <tr>
@@ -53,7 +52,7 @@
     		</tr>	
     		{% endfor %}
     </table>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
         <legend>Purchase Orders Placed for {{object.product_name}} ({{purchaseitems|length}})</legend>
             <thead>
             <tr>

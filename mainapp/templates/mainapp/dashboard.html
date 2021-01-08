@@ -14,6 +14,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script type="text/javascript" src="{% static '/js/dash.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static '/css/night_mode.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
 <style type="text/css">
@@ -117,6 +118,15 @@
 .custom_adjust{
 
 }
+.buttonpadding{
+    padding: 0 0 0 0;
+}
+#myBox1:fullscreen,#myBox2:fullscreen,#myBox3:fullscreen,#myBox4:fullscreen,#myBox5:fullscreen,#myBox6:fullscreen,#myBox7:fullscreen,#myBox8:fullscreen,#myBox9:fullscreen {
+  /*background-color: green;*/
+  width: 100vw;
+  height: 100vh;
+  /* etc.. 
+/*/*}*/
 </style>
 
 <!-- <link id="dark-theme-style" rel="stylesheet" />
@@ -138,8 +148,8 @@
                     <h5 class="card-category card_top">Total Employee</h5>
                     <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
                 </div> -->
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen()">
+                    <div class="chart-area card1" id='myBox1'>
                         <canvas id="quantity_by_category"></canvas>
                     </div>
                 </div>
@@ -151,8 +161,8 @@
                     <h5 class="card-category card_top">Daily Sales</h5>
                     <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> 3,500</h3>
                 </div> -->
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen2()">
+                    <div class="chart-area card1" id='myBox2'>
                       <canvas id="amount_by_category"></canvas>
                     </div>
                 </div>
@@ -170,8 +180,8 @@
                     <h5 class="card-category card_top">Total Employee</h5>
                     <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen3()">
+                    <div class="chart-area card1" id='myBox3'>
                         <canvas id="myChart" class="container"></canvas>
                     </div>
                 </div>
@@ -183,22 +193,22 @@
         <div class=" card1 card-chart cardbottom" id="customer_card">
                 <div class="card-header">
                     <h5 class="card-category card_top">Total Customers</h5>
-                    <div class="row">
+                    <div class="row card-title">
                         <div class="col-sm-4">
-                            <button class="btn btn-sm btn-info" onclick="function1()" class="card-title">Customer</button>
+                            <button class="btn btn-sm btn-info" onclick="function1()" class="buttonpadding">Customer</button>
                         </div>
                         <div class="col-sm-4">
-                            <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_customer}}</h3>
+                            <h3 class=" card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_customer}}</h3>
                         </div>
                         <div class="col-sm-4">
-                            <button class="btn btn-sm btn-info vendor-button" onclick="function2()" class="card-title">Vendor</button>
+                            <button class="btn btn-sm btn-info vendor-button pull-right" onclick="function2()" class="">Vendor</button>
                         </div>
 
                     </div>
                    <!--  <span> <button onclick="function1()" class="card-title">Customer</button>  <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_customer}}</h3> <button onclick="function2()" class="card-title">Vendor</button></span> -->
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen4()">
+                    <div class="chart-area card1" id='myBox4'>
                       <canvas id="myChart2"></canvas>
                     </div>
                 </div>
@@ -208,19 +218,19 @@
                     <h5 class="card-category card_top">Total Vendors</h5>
                     <div class="row">
                         <div class="col-sm-4">
-                            <button class="btn btn-sm btn-info" onclick="function1()" class="card-title">Customer</button>
+                            <button class="btn btn-sm btn-info buttonpadding" onclick="function1()" >Customer</button>
                         </div>
                         <div class="col-sm-4">
                             <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_vendor}}</h3>
                         </div>
                         <div class="col-sm-4">
-                            <button class="btn btn-sm btn-info" onclick="function2()" class="card-title">Vendor</button>
+                            <button class="btn btn-sm btn-info pull-right" onclick="function2()" class="card-title">Vendor</button>
                         </div>
 
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen5()">
+                    <div class="chart-area card1" id='myBox5'>
                       <canvas id="vendor_chart"></canvas>
                     </div>
                 </div>
@@ -233,8 +243,8 @@
                     <h5 class="card-category card_top">Total Production</h5>
                     <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i>{{total_production.amount__sum}}</h3>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body " onclick="toggleFullscreen6()">
+                    <div class="chart-area card1" id='myBox6'>
                       <canvas id="myChart3" class="container"></canvas>
                     </div>
                 </div>
@@ -257,8 +267,8 @@
                     </div>
                     <!-- <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_maintenance_cost.cost__sum}}</h3> -->
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen7()">
+                    <div class="chart-area card1" id='myBox7'>
                       <canvas id="myChart4"></canvas>
                     </div>
                 </div>
@@ -270,9 +280,9 @@
                     <h5 class="card_top">Total Machine Count</h5>
                     <h3 class="card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_machines}} </h3>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
-                      <canvas id="myChart5" class="container"></canvas>
+                <div class="card-body " onclick="toggleFullscreen8()">
+                    <div class="chart-area card1" id='myBox8'>
+                      <canvas id="myChart5"  class="container"></canvas>
                     </div>
                 </div>
             </div>
@@ -299,8 +309,8 @@
                         
                       </form>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area card1">
+                <div class="card-body" onclick="toggleFullscreen9()">
+                    <div class="chart-area card1" id='myBox9'>
                       <canvas id="myChart6" class="container"></canvas>
                     </div>
                 </div>
@@ -309,7 +319,8 @@
     </div>
 </div>
 <script>
-    
+
+   
 $(document).ready(function() {
 
   $('.input-daterange').datepicker({

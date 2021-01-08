@@ -4,12 +4,11 @@
 
 <div class="container">
 	<div class="row">
-	<div class="col-2">
-	</div>
-    <div class="col-9 col-md-offset-9 custyle">
+	
+    <div class="col-12 col-md-offset-12 custyle">
         <a href="{% url 'purchase-order-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Purchase Order</a>
         <a href="{% url 'purchase-order-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Purchase Order</a>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
         <legend>Order Details</legend>
         <tr>
             <td>Firm Name:</td><td>{{object.vendor}}</td>
@@ -27,7 +26,7 @@
             <td>Total Invoice Value:</td><td>{{object.total_amount}}</td> 
         </tr>
     </table>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
     <legend>Items ({{items|length}})</legend>
         <thead>
         <tr>

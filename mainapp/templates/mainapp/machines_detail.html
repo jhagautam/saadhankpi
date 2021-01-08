@@ -4,13 +4,11 @@
 
 <div class="container">
 	<div class="row">
-	<div class="col-2">
-	</div>
-    <div class="col-9 col-md-offset-9 custyle">
+    <div class="col-12 col-md-offset-12 custyle">
         <a href="{% url 'machine-edit' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Edit Machine Details</a>
         <a href="{% url 'machine-delete' object.id %}" class="btn text-info btn-xs pull-right"><b>-</b> Delete Machine</a>
     <legend>Machine Details</legend>
-        <table class="table table-striped">
+        <table class="table table-striped table-responsive">
         <tr>
             <td>Machine Name:</td><td>{{object.machine_name}}</td>
         </tr>
@@ -23,7 +21,7 @@
     </table>
     
     <legend>Maintenance Record ({{items|length}})</legend>
-    <table class="table table-striped">
+    <table class="table table-striped  table-responsive">
     <thead>
         <tr>
             <th class="text-center">#</th>

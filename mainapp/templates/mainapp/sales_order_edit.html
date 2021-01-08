@@ -4,18 +4,13 @@
 
 <div class="container contact">
   <div class="row">
-    <div class="col-md-3">
-        <div class="contact-info">
-            <!-- <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/> -->
-            
-        </div>
-    </div>
-    <div class="col-md-9">
+    
+    <div class="col-md-12">
 
     <form action="" method="POST">
             {% csrf_token %}
 
-        <div class="contact-form">
+        <div class="contact-form" style="color: black">
             <fieldset>{{o_form|crispy}}</fieldset>
         </div>
         <div class="contact-form">

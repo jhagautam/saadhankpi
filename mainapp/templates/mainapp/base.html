@@ -70,43 +70,6 @@
             </div>
         </div>
     </header>
-<script type="text/javascript">
-
-    if($('.menu-trigger').length){
-        $(".menu-trigger").on('click', function() { 
-            $(this).toggleClass('active');
-            $('.header-area .nav').slideToggle(200);
-        });
-    }
-
-
-    $(document).ready(function () {
-        $(document).on("scroll", onScroll);
-        
-        //smoothscroll
-        $('.scroll-to-section a[href^="#"]').on('click', function (e) {
-            e.preventDefault();
-            $(document).off("scroll");
-            
-            $('a').each(function () {
-                $(this).removeClass('active');
-            })
-            $(this).addClass('active');
-          
-            var target = this.hash,
-            menu = target;
-            var target = $(this.hash);
-            $('html, body').stop().animate({
-                scrollTop: (target.offset().top) + 1
-            }, 500, 'swing', function () {
-                window.location.hash = target;
-                $(document).on("scroll", onScroll);
-            });
-        });
-    });
-</script>
-
-
 {% block content %}
 
 {% endblock %}
@@ -116,7 +79,6 @@
     <!-- Bootstrap -->
     <script src="{% static 'js/popper.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
     <!-- Plugins -->
     <script src="{% static 'js/scrollreveal.min.js' %}"></script>
     <script src="{% static 'js/waypoints.min.js' %}"></script>

@@ -3,10 +3,9 @@
 {% block application_content %}
 <div class="container">
 	<div class="row">
-	<div class="col-2">
-	</div>
-    <div class="col-9 col-md-offset-9 custyle">
-    <table class="table table-striped">
+	
+    <div class="col-12 col-md-offset-12 custyle">
+    <table class="table table-striped table-responsive">
     <thead>
     <a href="{% url 'purchase-order-create' %}" class="btn text-info btn-xs pull-right"><b>+</b> Add Purchase Order</a>
     <legend>Purchase Orders ({{item|length}})</legend>    

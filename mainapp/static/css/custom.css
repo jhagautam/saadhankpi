@@ -249,15 +249,20 @@ header
 --------------------------------------------- 
 */
 
-.background-header {
-  background: #03A9F4 !important;
-  height: 80px!important;
+.background-header  {
+    color: #fff;
+  /*color: #03A9F4;*/
+  background: #17202A !important;
+  height: 60px!important;
   position: fixed!important;
   top: 0px;
   left: 0px;
   right: 0px;
   box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
 }
+.background-header .header-area .main-nav .logo {
+    color: #212F3C;
+  }
 
 .background-header .logo,
 .background-header .main-nav .nav li a {
@@ -388,6 +393,49 @@ header
   opacity: 1;
 }
 
+.toggle-menu{
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  top: 23px;
+  width: 32px;
+  height: 40px;
+  text-indent: -9999em;
+  z-index: 99;
+  right: 40px;
+  display: none;
+}
+.toggle-menu span,
+.toggle-menu span:before,
+.toggle-menu span:after {
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  background-color: #03A9F4;
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 2px;
+  left: 0;
+}
+
+.toggle-menu.active span:before {
+  -moz-transform: translateY(6px) translateX(1px) rotate(45deg);
+  -ms-transform: translateY(6px) translateX(1px) rotate(45deg);
+  -webkit-transform: translateY(6px) translateX(1px) rotate(45deg);
+  transform: translateY(6px) translateX(1px) rotate(45deg);
+  background-color: #03A9F4;
+}
+
+.toggle-menu.active span:after {
+  -moz-transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  -ms-transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  -webkit-transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  transform: translateY(-6px) translateX(1px) rotate(-45deg);
+  background-color: #03A9F4;
+}
+
 .header-area .main-nav .menu-trigger {
   cursor: pointer;
   display: block;
@@ -496,7 +544,7 @@ header
 }
 
 .background-header .main-nav .menu-trigger.active span:after {
-  background-color: #03A9F4;
+  /*background-color: #03A9F4;*/
 }
 
 .header-area.header-sticky {
@@ -508,7 +556,8 @@ header
 }
 
 .header-area.header-sticky .nav li a.active {
-  color: #03A9F4;
+  /*background-color: #;*/
+  color: #fff;
 }
 
 @media (max-width: 1200px) {
@@ -523,7 +572,7 @@ header
 
 @media (max-width: 767px) {
   .header-area .main-nav .logo {
-    color: #03A9F4;
+    color: #fff;
   }
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
