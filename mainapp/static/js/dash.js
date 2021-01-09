@@ -12,11 +12,18 @@ function getFullscreenElement() {
 }
 
 function toggleFullscreen() {
-  if (getFullscreenElement()) {
-    document.exitFullscreen();
-  } else {
     screen_resize();
-  }
+    var x = document.getElementById("normal_mode");
+    var y=  document.getElementById("fullscreen_mode");
+    x.style.display= "none";
+    y.style.display = "block";
+}
+function exitfull(){
+  document.exitFullscreen();
+    var x = document.getElementById("normal_mode");
+    var y=  document.getElementById("fullscreen_mode");
+    y.style.display= "none";
+    x.style.display = "block";
 }
 
 function toggleFullscreen2() {
@@ -99,5 +106,3 @@ function toggleFullscreen9() {
     });
   }
 }
-
-

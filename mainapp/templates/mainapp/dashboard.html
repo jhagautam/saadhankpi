@@ -142,15 +142,21 @@
 
 <div class="row row_side_padding">
         <div class="col-md-6 column_side_padding cardbottom ">
-            <div class="card1 card-chart">
+            <div class="card1 card-chart" id='myBox1'>
                 <!-- <div class="card-header ">
                     <h5 class="card-category card_top">Total Employee</h5>
                     <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
                 </div> -->
-                <div class="card-body" onclick="toggleFullscreen()">
-                    <div class="chart-area card1" id='myBox1'>
+                <div class="card-body">
+                    <div class="chart-area card1">
                         <canvas id="quantity_by_category"></canvas>
                     </div>
+                </div>
+                <div class="card-header " id='normal_mode'>
+                    <button class="btn btn-sm btn-success"  onclick="toggleFullscreen()">Click to expand</button>
+                </div>
+                <div class="card-header " style="display:none" id='fullscreen_mode'>
+                    <button class="btn btn-sm btn-success"  onclick="exitfull()">Click to exit full screen</button>
                 </div>
             </div>
         </div>
@@ -164,6 +170,9 @@
                     <div class="chart-area card1" id='myBox2'>
                       <canvas id="amount_by_category"></canvas>
                     </div>
+                </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
                 </div>
             </div>  
         </div>
@@ -183,6 +192,9 @@
                     <div class="chart-area card1" id='myBox3'>
                         <canvas id="myChart" class="container"></canvas>
                     </div>
+                </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
                 </div>
             </div>
         </div>
@@ -211,6 +223,9 @@
                       <canvas id="myChart2"></canvas>
                     </div>
                 </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
+                </div>
             </div> 
             <div class=" card1 card-chart cardbottom" id="vendor_card" style="display:none">
                 <div class="card-header">
@@ -233,6 +248,9 @@
                       <canvas id="vendor_chart"></canvas>
                     </div>
                 </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
+                </div>
             </div>
   </div>
 
@@ -246,6 +264,9 @@
                     <div class="chart-area card1" id='myBox6'>
                       <canvas id="myChart3" class="container"></canvas>
                     </div>
+                </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
                 </div>
             </div>
         </div>
@@ -271,6 +292,9 @@
                       <canvas id="myChart4"></canvas>
                     </div>
                 </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
+                </div>
             </div>
         </div>
         <div class="col-lg-4">
@@ -283,6 +307,9 @@
                     <div class="chart-area card1" id='myBox8'>
                       <canvas id="myChart5"  class="container"></canvas>
                     </div>
+                </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
                 </div>
             </div>
         </div>
@@ -312,6 +339,9 @@
                     <div class="chart-area card1" id='myBox9'>
                       <canvas id="myChart6" class="container"></canvas>
                     </div>
+                </div>
+                <div class="card-header ">
+                    <button class="btn btn-sm btn-success" onclick="toggleFullscreen()">Click to expand</button>
                 </div>
             </div>
         </div>
