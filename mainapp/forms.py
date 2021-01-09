@@ -7,6 +7,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 #designation creation form
+class ContactForm(forms.Form):
+
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea)
+
 class createdesignation(ModelForm):
 	class Meta:
 		model=designation

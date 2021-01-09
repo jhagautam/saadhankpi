@@ -10,6 +10,7 @@ urlpatterns = [
     path('about/',about, name='about'),
     path('services/',services, name='services'),
     path('contact/',contact, name='contact'),
+    path('thanks/',thanks, name='thanks'),
     
     path('products/<user_id>', ProductListView.as_view(), name='products'),
     path('products/category/<user_id>', ProductCategoryListView.as_view(), name='product-category-view'),
@@ -24,7 +25,7 @@ urlpatterns = [
     
     path('accounts/register/',signup,name='register'),
     path('accounts/login/',auth_views.LoginView.as_view(template_name='mainapp/login.html'),name='login'),
-    path('accounts/logout/',auth_views.LogoutView.as_view(template_name='mainapp/logout.html'),name='logout'),
+    path('accounts/logout/',auth_views.LogoutView.as_view(template_name='mainapp/home.html'),name='logout'),
     path('user/firm/',user_firm_create_form,name='user-firm'),
     
     path('sales/order/create',sales_order_create_form,name='sales-order-create'),

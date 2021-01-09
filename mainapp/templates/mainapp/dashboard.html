@@ -6,13 +6,10 @@
 {% load get_itemss from custom_tags %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css"> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css"> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
-
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"><s/script> -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script type="text/javascript" src="{% static '/js/dash.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static '/css/night_mode.css' %}">
@@ -28,7 +25,6 @@
     }
     .card-header{
         border-width: 0px;
-        /*background-color: #3498DB;*/
     }
 
     .card-header:hover {
@@ -56,7 +52,6 @@
         margin-left: 20px;
         margin-right:20px;
         padding-top: 20px;
-        /*margin-bottom:20px;*/
     }
 #start,#end{
     background-color: #AED6F1;
@@ -66,14 +61,10 @@
 .card1 {
   border-radius: 4px;
   background: #3E3E3E;
-
-   /*background-color: rgba(10, 100, 150, 0.5);*/
   box-shadow: 0 6px 10px rgba(20, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-  /*padding: 14px 20px 18px 10px;*/
-  /*cursor: pointer;*/
 }
 
 .card1:hover {
@@ -81,22 +72,11 @@
     border-color: #0ff;
   transform: scale(1.00);
   box-shadow:0px 0px 10px 0.09px #0ff;
-  /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);*/
 }
 .active {
   display: block;
   margin: 0 21%;
 }
-
-/*button {
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  border: none;
-  background-color: #ccc;
-  margin: 5px;
-}
-*/
 .custombtn{
     color: #fff;
     background-color: rgba(30, 136, 229, 1);
@@ -115,7 +95,6 @@
   padding: 25px;
 }
 .slider{
-    /*position: fixed;*/
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
@@ -134,7 +113,6 @@
 }
 #myBox1:fullscreen,#myBox2:fullscreen,#myBox3:fullscreen,#customer_card:fullscreen,#vendor_card:fullscreen,#myBox6:fullscreen,#myBox7:fullscreen,#myBox8:fullscreen,#myBox9:fullscreen {
     margin-top: 100px;
-    /*background-color: indigo;*/
     width: 50%;
     height: 50%;
     overflow-x: scroll;
@@ -151,36 +129,20 @@
     background-color: green;
 }
 </style>
-
-<!-- <link id="dark-theme-style" rel="stylesheet" />
-<a
-        href="javascript:void()"
-        class="btn btn-outline-info btn-lg ml-auto font-weight-bold"
-        id="theme-toggler"
-        onclick="toggleTheme()"
-></a>
-<script src="{% static '/js/mode.js' %}"> </script> 
- -->
-<!-- <div class="container"> -->
 <div class="dashboard_background">
 
 <div class="row row_side_padding">
         <div class="col-md-6 column_side_padding cardbottom ">
             <div class="card1 card-chart" id='myBox1'>
-                <!-- <div class="card-header ">
-                    <h5 class="card-category card_top">Total Employee</h5>
-                    <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
-                </div> -->
                 <div >
                 <div class="card-body">
                     <div class="chart-area card1">
                         <canvas id="quantity_by_category" class=""></canvas>
-                       <!-- <h3 class=""> gautam</h3> -->
                     </div>
                 </div>
                 
                 <div class="card-header " id='normal_mode'>
-                    <button class="btn btn-sm btn-block custombtn "  onclick="toggleFullscreen()">Click to expand</button>
+                    <button class="btn btn-sm btn-block custombtn "  onclick="toggleFullscreen()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull()">Click to exit full screen</button>
@@ -190,17 +152,13 @@
         </div>
         <div class="col-md-6">
             <div class="card1 card-chart cardbottom" id='myBox2'>
-                <!-- <div class="card-header">
-                    <h5 class="card-category card_top">Daily Sales</h5>
-                    <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> 3,500</h3>
-                </div> -->
                 <div class="card-body">
                     <div class="chart-area card1" >
                       <canvas id="amount_by_category"></canvas>
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode2'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen2()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen2()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode2'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull2()">Click to exit full screen</button>
@@ -208,9 +166,6 @@
             </div>  
         </div>
 </div>
-
-
-
 
 <div class="row row_side_padding">
         <div class="col-lg-4 column_side_padding">
@@ -225,7 +180,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode3'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen3()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen3()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode3'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull3()">Click to exit full screen</button>
@@ -248,9 +203,7 @@
                         <div class="col-sm-4">
                             <button class="btn btn-sm btn-info vendor-button pull-right" id= 'vendorbtn1' onclick="function2()">Vendor</button>
                         </div>
-
                     </div>
-                   <!--  <span> <button onclick="function1()" class="card-title">Customer</button>  <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_customer}}</h3> <button onclick="function2()" class="card-title">Vendor</button></span> -->
                 </div>
                 <div class="card-body">
                     <div class="chart-area card1">
@@ -258,7 +211,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode4'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen4()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen4()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode4'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull4()">Click to exit full screen</button>
@@ -286,7 +239,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode5'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen5()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen5()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode5'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull5()">Click to exit full screen</button>
@@ -306,7 +259,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode6'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen6()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen6()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode6'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull6()">Click to exit full screen</button>
@@ -328,7 +281,6 @@
                             <h4 class="card-title"><span class="cardtoptext justifyright">Days Vested  </span><span class="card_top">{{total_days_engaged.days_engaged__sum}}</span></h4>
                         </div>
                     </div>
-                    <!-- <h3 class="card-title card_top"><i class="tim-icons icon-delivery-fast text-info"></i> {{total_maintenance_cost.cost__sum}}</h3> -->
                 </div>
                 <div class="card-body" >
                     <div class="chart-area card1" >
@@ -336,7 +288,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode7'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen7()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen7()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode7'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull7()">Click to exit full screen</button>
@@ -355,7 +307,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode8'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen8()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen8()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode8'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull8()">Click to exit full screen</button>
@@ -390,7 +342,7 @@
                     </div>
                 </div>
                 <div class="card-header " id='normal_mode9'>
-                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen9()">Click to expand</button>
+                    <button class="btn btn-sm custombtn btn-block" onclick="toggleFullscreen9()">Tap in to See Analytics</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode9'>
                     <button class="btn btn-sm custombtn btn-block"  onclick="exitfull9()">Click to exit full screen</button>
@@ -496,9 +448,6 @@ var myChart = new Chart(ctx, {
     }
 });
 
-
-
-
 var ctx = document.getElementById('quantity_by_category').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -584,7 +533,6 @@ var myChart = new Chart(ctx, {
     }
 });
 
-
 function function1() {
   var x = document.getElementById("customer_card");
   var y=  document.getElementById("vendor_card");
@@ -605,7 +553,6 @@ function function2() {
 
 
 var ctx = document.getElementById('myChart').getContext('2d');
-// Chart.defaults.global.defaultFontColor = "#fff";
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -722,7 +669,6 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [{% for x in customer_city_wise %}'{{x | get_item4:'key'}}',{% endfor %}],
         datasets: [{
-            // label: 'Total Employees',
             data: [{% for x in customer_city_wise %}{{x | get_item5:'key'}},{% endfor %}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.8)',
@@ -786,7 +732,6 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [{% for x in vendor_city_wise %}'{{x | get_item4:'key'}}',{% endfor %}],
         datasets: [{
-            // label: 'Total Employees',
             data: [{% for x in vendor_city_wise %}{{x | get_item5:'key'}},{% endfor %}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.8)',
@@ -1139,14 +1084,8 @@ $(document).on('submit','#submit_bookmark',function(e){
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
             },
             success: function(response){
-                // var x = JSON.parse(response["context1"]);
-                // var y= x[0];
-                // x={{ res|get_itemss }}
-                // var x= response[0].res;
                 console.log('printing',response.res, response.res2)
-                // myChart.data.datasets[0].data=[1000,4000];
                 myChart.data.datasets[0].data=[response.res,response.res2];
-                // myChart.data.datasets[1].data=[response.res2];
                 myChart.update();
             }
         });

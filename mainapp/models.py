@@ -5,6 +5,16 @@ from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.urls import reverse
 
+
+class contactus(models.Model):
+	name=models.CharField(max_length=30)
+	email=models.EmailField(null=True)
+	subject=models.CharField(max_length=300)
+	message=models.TextField(max_length=500, blank=True)
+
+	def __str__(self):
+		return self.email
+
 class User(AbstractUser):
 	is_admin = models.BooleanField(default=True)
 

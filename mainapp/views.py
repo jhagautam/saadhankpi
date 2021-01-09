@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory, modelformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
+from django.core.mail import send_mail, BadHeaderError
+
 
 class make_dictionary(dict):  
 	def __init__(self): 
@@ -30,8 +32,19 @@ def solver(request):
 		return JsonResponse(context1)
 
 def home(request):
-	context={'title':'Home'}
-	return render(request,'mainapp/home.html',context)
+	form = ContactForm()
+	if request.method == 'POST':
+		form = ContactForm(request.POST)
+		if form.is_valid():
+			subject = form.cleaned_data['subject']
+			from_email = form.cleaned_data['from_email']
+			message = form.cleaned_data['message']
+			try:
+				send_mail(subject, message, from_email, ['gjha@me.iitr.ac.in'])
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect('thanks')
+	return render(request, "mainapp/home.html", {'form': form})
 
 def about(request):
 	context={'title':'About'}
@@ -42,15 +55,29 @@ def services(request):
 	return render(request,'mainapp/services.html',context)
 
 def contact(request):
-	context={'title':'Contact'}
-	return render(request,'mainapp/contact.html',context)
+	ContactForm(request.POST)
+	if request.method == 'POST':
+		form=createmessage(request.POST)
+		if form.is_valid():
+			subject = form.cleaned_data['subject']
+			from_email = form.cleaned_data['from_email']
+			message = form.cleaned_data['message']
+			try:
+				send_mail(subject, message, from_email, ['gjha@me.iitr.ac.in'])
+			except BadHeaderError:
+				return HttpResponse('Invalid header found.')
+			return redirect('thanks')
+	return render(request, "mainapp/contact.html", {'form': form})
+
+def thanks(request):
+	return HttpResponse('Thank you for your message.')
 
 @login_required
 def add_data(request):
 	firm = user_firm.objects.filter(user = request.user)
 	if firm.exists():
 		context={'title':'Application Home'}
-		return render(request, 'mainapp/application.html', context)
+		return render(request, 'mainapp/application_home.html', context)
 	else:
 		return redirect('user-firm')
 

@@ -461,7 +461,8 @@ header
   position: absolute;
   width: 30px;
   height: 2px;
-  left: 0;
+
+  /*left: 0;*/
 }
 
 .background-header .main-nav .menu-trigger span,
@@ -481,7 +482,7 @@ header
   position: absolute;
   width: 30px;
   height: 2px;
-  left: 0;
+  /*left: 0;*/
   width: 75%;
 }
 
@@ -492,7 +493,7 @@ header
 
 .header-area .main-nav .menu-trigger span:before,
 .header-area .main-nav .menu-trigger span:after {
-  content: "tjyfjfj";
+  content: "";
 }
 
 .header-area .main-nav .menu-trigger span {
@@ -514,6 +515,7 @@ header
   -webkit-transform-origin: 33% 0;
   transform-origin: 33% 0;
   top: 10px;
+  z-index: 10;
 }
 
 .header-area .main-nav .menu-trigger.active span,
@@ -527,7 +529,7 @@ header
   -moz-transform: translateY(6px) translateX(1px) rotate(45deg);
   -ms-transform: translateY(6px) translateX(1px) rotate(45deg);
   -webkit-transform: translateY(6px) translateX(1px) rotate(45deg);
-  transform: translateY(6px) translateX(1px) rotate(45deg);
+  transform: translateY(0px) translateX(1px) rotate(45deg);
   background-color: #03A9F4;
 }
 
@@ -907,7 +909,8 @@ contact
 }
 
 #contact-us .contact-form {
-  padding: 80px;
+  padding-top: 80px;
+  padding-bottom: 80px;
   /*background-image: {% static url= %};*/
   background-position: center center;
   background-repeat: no-repeat;
@@ -1033,10 +1036,12 @@ responsive
     margin-bottom: -7px;
   }
   #contact-us .contact-form {
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
   #contact-us .contact-form #contact {
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
 }
