@@ -5,12 +5,6 @@ function screen_resize() {
         });
     if(w <= 500) {
       screen.orientation.lock("landscape-primary")
-        .then(function() {
-          alert("gautam");
-        })
-        .catch(function(error) {
-          alert(error);
-        });
         }
 }
 function getFullscreenElement() {
