@@ -79,7 +79,7 @@
 .card1:hover {
     border-width: 1px;
     border-color: #0ff;
-  transform: scale(1.05);
+  transform: scale(1.00);
   box-shadow:0px 0px 10px 0.09px #0ff;
   /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);*/
 }
@@ -121,10 +121,31 @@
 .buttonpadding{
     padding: 0 0 0 0;
 }
+#quantity_by_category:fullscreen{
+    margin: 25px 25px 25px 25px;
+}
+.card2:fullscreen{
+    background-color: red;
+    margin: 25px 25px 25px 25px;
+}
 #myBox1:fullscreen,#myBox2:fullscreen,#myBox3:fullscreen,#myBox4:fullscreen,#myBox5:fullscreen,#myBox6:fullscreen,#myBox7:fullscreen,#myBox8:fullscreen,#myBox9:fullscreen {
-  width: 100vw;
-  height: 80vh;
+    margin-top: 100px;
+    background-color: indigo;
+    width: 50%;
+    height: 50%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    .card1:hover {
+        display: none;
+    }
+    .card-body{
+    margin-top: 80px;
+    background-color: green;
+}
    }
+#myBox1.card-body:fullscreen{
+    background-color: green;
+}
 </style>
 
 <!-- <link id="dark-theme-style" rel="stylesheet" />
@@ -146,18 +167,22 @@
                     <h5 class="card-category card_top">Total Employee</h5>
                     <h3 class="card-title card_top"><i class="tim-icons icon-bell-55 text-primary"></i> {{total_employee}}</h3>
                 </div> -->
+                <div >
                 <div class="card-body">
                     <div class="chart-area card1">
-                        <canvas id="quantity_by_category"></canvas>
+                        <canvas id="quantity_by_category" class=""></canvas>
+                       <!-- <h3 class=""> gautam</h3> -->
                     </div>
                 </div>
+                
                 <div class="card-header " id='normal_mode'>
-                    <button class="btn btn-sm btn-success"  onclick="toggleFullscreen()">Click to expand</button>
+                    <button class="btn btn-sm btn-block btn-success"  onclick="toggleFullscreen()">Click to expand</button>
                 </div>
                 <div class="card-header " style="display:none" id='fullscreen_mode'>
-                    <button class="btn btn-sm btn-success"  onclick="exitfull()">Click to exit full screen</button>
+                    <button class="btn btn-sm btn-success btn-block"  onclick="exitfull()">Click to exit full screen</button>
                 </div>
             </div>
+        </div>
         </div>
         <div class="col-md-6">
             <div class="card1 card-chart cardbottom">
