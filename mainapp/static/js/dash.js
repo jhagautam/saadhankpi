@@ -1,4 +1,18 @@
-
+function screen_resize() {
+    var h = parseInt(window.innerHeight);
+    var w = parseInt(window.innerWidth);
+    document.getElementById("myBox1").requestFullscreen().catch((e) => {
+        });
+    if(w <= 500) {
+      screen.orientation.lock("landscape-primary")
+        .then(function() {
+          alert("gautam");
+        })
+        .catch(function(error) {
+          alert(error);
+        });
+        }
+}
 function getFullscreenElement() {
   return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement || document.msFullscreenElement;
 }
@@ -7,10 +21,7 @@ function toggleFullscreen() {
   if (getFullscreenElement()) {
     document.exitFullscreen();
   } else {
-    document.getElementById("myBox1").requestFullscreen().catch((e) => {
-      console.log('hi');
-      
-    });
+    screen_resize();
   }
 }
 
