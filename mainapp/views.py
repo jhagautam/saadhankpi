@@ -32,19 +32,14 @@ def solver(request):
 		return JsonResponse(context1)
 
 def home(request):
-	form = ContactForm()
+	form=createmessage()
 	if request.method == 'POST':
-		form = ContactForm(request.POST)
+		form=createmessage(request.POST)
 		if form.is_valid():
-			subject = form.cleaned_data['subject']
-			from_email = form.cleaned_data['from_email']
-			message = form.cleaned_data['message']
-			try:
-				send_mail(subject, message, from_email, ['gjha@me.iitr.ac.in'])
-			except BadHeaderError:
-				return HttpResponse('Invalid header found.')
-			return redirect('thanks')
-	return render(request, "mainapp/home.html", {'form': form})
+			form.save()
+			return redirect('/')
+	context={'form':form,'title':'contact'}
+	return render(request, 'mainapp/home.html', context)
 
 def about(request):
 	context={'title':'About'}
